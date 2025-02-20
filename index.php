@@ -35,11 +35,16 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="./pages/orchestre.php">orchestre</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="./pages/login.php">Login</a>
         </li>
         <?php if($user != null) {?>
         <li class="nav-link">
+        <a class="nav-link" href="./pages/login.php">
           <?php echo $user["username"]?>
+        </a>
         </li>
         <?php } ?>
       </ul>
@@ -48,7 +53,8 @@
 </nav>
 
     <div class="row">
-    <div class="col-6 mx-auto">
+    <div class="col-6 mx-auto border rounded mt-2 shadow">
+      <input type="text" name="search" class="form-control w-25 m-2 border-black" id="search">
       <!-- table with search -->
     <table id="searchConc" class="table">
         <tr>
