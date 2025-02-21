@@ -37,7 +37,7 @@
           <a class="nav-link" href="#">Login</a>
         </li>
         <?php if($user != null) {?>
-        <li class="nav-link">
+        <li class="nav-item">
         <a class="nav-link" href="./pages/login.php">
           <?php echo $user["username"]?>
         </a>
@@ -63,10 +63,27 @@
   <?php }else{ ?>
       <div class="col-4 mx-auto rounded p-2 border">
         Sei già loggato
-        <form action="../user/logoutaction.php">
-          <button class="btn btn-danger">
+        <form method="POST" action="../user/logoutaction.php">
+          <button class="btn btn-danger mt-3">
             Log Out 
           </button>
+        </form>
+      </div>
+        <div class="col-6 border rounded mx-auto">
+              <form method="POST" action="../user/insertaction.php">
+          <div class="mb-3">
+            <label for="titolo" class="form-label">Titolo</label>
+            <input type="text" name="titolo" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="descrizione" class="form-label">Descrizione</label>
+            <input type="text" class="form-control" name="descrizione">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">data</label>
+            <input type="date" class="form-control" name="data">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
       <?php } ?>

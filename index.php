@@ -41,7 +41,7 @@
           <a class="nav-link" href="./pages/login.php">Login</a>
         </li>
         <?php if($user != null) {?>
-        <li class="nav-link">
+        <li class="nav-item">
         <a class="nav-link" href="./pages/login.php">
           <?php echo $user["username"]?>
         </a>

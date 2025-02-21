@@ -20,6 +20,8 @@
         }
         $user = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
 
+        //orc è un'array di array associativi con nome dell'orchestra
+        // nome del direttore ed un array per gli orchestrali
         $orc = $db->getOrchestre();
 
     ?>
@@ -39,7 +41,7 @@
           <a class="nav-link" href="./login.php">Login</a>
         </li>
         <?php if($user != null) {?>
-        <li class="nav-link">
+        <li class="nav-item">
         <a class="nav-link" href="./login.php">
           <?php echo $user["username"]?>
         </a>
@@ -52,13 +54,28 @@
 
     <div class="row">
     <div class="col-6 mx-auto border rounded mt-2 shadow">
-      <!-- table with search -->
-            <?php var_dump($orc); ?>
+    <input type="text" name="search" class="form-control w-25 m-2 border-black" id="search">
 
+      <!-- table with search -->
+    <table class="table" id="searchConc">
+      <tr>
+        <th>Nome orchestra</th>
+        <th>Direttore</th>
+        <th>Orchestrali</th>
+      </tr>
+      <?php for($i = 0; $i < count($orc); $i++) { ?>
+        <tr>
+          <td><?php echo $orc[$i]["nome"]; ?></td>
+          <td><?php echo $orc[$i]["nomeDir"] ?></td>
+          <td><?php for($j = 0 ; $j < count($orc[$i]["orchestrali"]); $j++){
+            echo $orc[$i]["orchestrali"][$j] . " ";
+          } ?></td>
+        </tr>
+        <?php } ?>
+    </table>
     </div>
 </div>
-
-    <script src="./js/search.js"> </script>
+    <script src="../js/search.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>  </body>
 </html>
