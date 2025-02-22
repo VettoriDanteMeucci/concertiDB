@@ -19,6 +19,7 @@
             while($riga = mysqli_fetch_assoc($res)){
                 $ans[] = $riga;
             }
+            mysqli_close($conn);
             return $ans;
         }
 
@@ -51,6 +52,8 @@
                 $orchestrali[] = "$tmp[nome] $tmp[cognome]";
             }
             $ans["orchestrali"] = $orchestrali;
+            $ans["id"] = $id;
+            mysqli_close($conn);
             return $ans;
         }
 
@@ -62,6 +65,7 @@
             while($row = mysqli_fetch_assoc($res)){
                 $ans[] = $this->getOrchestraByID($row["id"]);
             }
+            mysqli_close($conn);
             return $ans;
         }
         /**
@@ -73,6 +77,7 @@
             $query = "SELECT * FROM persona WHERE cf = '$cf'";
             $res = mysqli_query($conn, $query);
             $row = mysqli_fetch_assoc($res);
+            mysqli_close($conn);
             return $row;
         }
 
@@ -87,9 +92,32 @@
             if($res == false || mysqli_num_rows($res) == 0){
                 return null;
             }
-            while($row = mysqli_fetch_assoc($res)){
+            while($row = mysqli_fetch_assoc($res)){     
+                mysqli_close($conn);
                 return $row;
             }
+        }
+
+        //return di un array contenente array associativi con id e nome di tutte le sale
+        public function getSale(){
+            $conn = $this->newConnection();
+            $query = "SELECT * FROM sala";
+            $response = mysqli_query($conn, $query);
+            $ans = [];
+            while($row = mysqli_fetch_assoc($response)){
+                $ans[] = $row;
+            }
+            mysqli_close($conn);
+            return $ans;
+        }
+        
+        public function insertConcerto($titolo, $descrizione, $data, $idSala, $idOrchestra){
+            $conn = $this->newConnection();
+            $query = "INSERT INTO concerti (titolo, descrizione, data, salaID, idOrchestra)
+                        VALUES ('$titolo', '$descrizione', '$data', '$idSala', '$idOrchestra')";
+            $res = mysqli_query($conn, $query);
+            mysqli_close($conn);
+            return $res;
         }
 
     }

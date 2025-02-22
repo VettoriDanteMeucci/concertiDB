@@ -69,21 +69,44 @@
           </button>
         </form>
       </div>
+      <!-- secondo form -->
         <div class="col-6 border rounded mx-auto">
-              <form method="POST" action="../user/insertaction.php">
+              <form method="POST" action="../user/insertconcertoaction.php">
           <div class="mb-3">
             <label for="titolo" class="form-label">Titolo</label>
-            <input type="text" name="titolo" class="form-control">
+            <input required type="text" name="titolo" class="form-control">
           </div>
           <div class="mb-3">
             <label for="descrizione" class="form-label">Descrizione</label>
-            <input type="text" class="form-control" name="descrizione">
+            <input required type="text" class="form-control" name="descrizione">
           </div>
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">data</label>
-            <input type="date" class="form-control" name="data">
+            <label for="data" class="form-label">data</label>
+            <input required type="date" class="form-control" name="data">
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <div class="mb-3">
+            <label for="sala" class="form-label">Sala</label>
+            <select required class="form-select" name="idSala">
+              <?php 
+                $sale = $db->getSale();
+                foreach($sale as $sala){
+                  echo   "<option value=\"$sala[id]\">$sala[nome]</option>";
+                }
+              ?>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="orchestra" class="form-label">Orchestra</label>
+            <select required class="form-select" name="idOrchestra">
+              <?php 
+                $orchestre = $db->getOrchestre();
+                foreach($orchestre as $orchestra){
+                  echo   "<option value=\"$orchestra[id]\">$orchestra[nome]</option>";
+                }
+              ?>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary m-3">Submit</button>
         </form>
       </div>
       <?php } ?>
